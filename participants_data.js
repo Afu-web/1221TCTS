@@ -18,7 +18,7 @@ window.PARTICIPANTS_DATA = {
     ],
     photographer: [
         { name: "許尼", gear: "萬能的", fb: "https://www.facebook.com/xu.ni.310702?locale=zh_TW" },
-        { name: "測試", gear: "這行是測試", fb: "" }
+        { name: "測試", gear: "這行是測試呦", fb: "" }
     ]
 };
 
