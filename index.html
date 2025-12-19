@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12月21日台中車站毛拍</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="container">
+        <header class="hero">
+            <h1 class="glow-text">活動詳情</h1>
+            <p class="subtitle">12月21日台中車站前毛拍</p>
+        </header>
+
+        <section class="info-section grid">
+            <div class="info-card" id="time-card">
+                <div class="icon">📅</div>
+                <h3>時間</h3>
+                <p class="info-text">集合時間：2025年12月21日 19:00</p>
+                <p class="info-text">預計出毛時間：19:40(若非馬內可在此時間再抵達)</p>
+            </div>
+            <div class="info-card" id="location-card">
+                <div class="icon">📍</div>
+                <h3>地點</h3>
+                <p class="info-text">毛毛&馬內：雙星大飯店</p>
+                <p class="info-text">其他人：台中車站(依後續通知為主)</p>
+
+            </div>
+        </section>
+
+        <section class="participants-section">
+            <div class="section-header">
+                <h2>參加人員</h2>
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="furry" data-file="furry.txt">毛毛</button>
+                    <button class="tab-btn" data-tab="helper" data-file="helper.txt">馬內</button>
+                    <button class="tab-btn" data-tab="photographer" data-file="photographer.txt">攝影</button>
+                </div>
+            </div>
+
+            <div class="tab-content-wrapper">
+                <div class="tab-panel active" id="participant-panel">
+                    <div class="table-container">
+                        <table class="participants-table">
+                            <thead id="table-head">
+                                <!-- Dynamic headers -->
+                            </thead>
+                            <tbody id="table-body">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="artist-footer">
+            <div class="artist-image-container">
+                <img src="author.png" alt="Artist: AfuHuli" class="artist-image">
+            </div>
+            <div class="copyright">
+                <p>&copy; AfuHuli. All rights reserved.</p>
+                <p class="vibe-credit">Vibe Coding with Antigravity</p>
+            </div>
+        </footer>
+    </main>
+
+    <script src="participants_data.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tableHead = document.getElementById('table-head');
+            const tableBody = document.getElementById('table-body');
+
+            const columnConfig = {
+                furry: ['名稱', '備註', 'FB'],
+                helper: ['名稱', '備註', 'FB'],
+                photographer: ['名稱', '備註', 'FB']
+            };
+
+            // Fallback data for local file browsing (CORS workaround) - Only used if both script and fetch fail
+            const fallbackData = {
+                furry: [
+                    { name: "曉禔", description: "主揪", fb: "https://www.facebook.com/23weif?locale=zh_TW" },
+                    { name: "玄野", description: "暫無", fb: "https://www.facebook.com/xuan.ye.908297?locale=zh_TW" },
+                    { name: "晴浪", description: "流量密碼", fb: "https://www.facebook.com/ChungLungSW?locale=zh_TW" },
+                    { name: "緋閻月", description: "暫無", fb: "https://www.facebook.com/fei.yanyue?locale=zh_TW" }
+                ],
+                helper: [
+                    { name: "許尼", role: "萬能的", fb: "https://www.facebook.com/xu.ni.310702?locale=zh_TW" },
+                    { name: "沓羅", role: "暫無", fb: "https://www.facebook.com/taroOwO?locale=zh_TW" },
+                    { name: "白熊", role: "網黃", fb: "https://www.facebook.com/li.yi.min.230404?locale=zh_TW" },
+                    { name: "多夢", role: "遠道而來", fb: "https://www.facebook.com/Domo0312?locale=zh_TW" },
+                    { name: "寒暄", role: "很會唱歌", fb: "https://www.facebook.com/han.xuan.638973?locale=zh_TW" }
+                ],
+                photographer: [
+                    { name: "許尼", gear: "萬能的", fb: "https://www.facebook.com/xu.ni.310702?locale=zh_TW" }
+                ]
+            };
+
+            const fbIconSvg = `<svg class="fb-icon" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-8.74h-2.94v-3.403h2.94v-2.511c0-2.915 1.78-4.502 4.379-4.502 1.245 0 2.315.093 2.626.134v3.045l-1.802.001c-1.414 0-1.688.672-1.688 1.658v2.175h3.37l-.439 3.403h-2.931v8.74h6.183c.731 0 1.325-.593 1.325-1.325v-21.351c0-.732-.594-1.325-1.325-1.325z"/></svg>`;
+
+            async function loadTabData(tabId, fileName) {
+                const section = document.querySelector('.participants-section');
+                // Start fade out animation for the whole section
+                section.classList.add('switching');
+
+                // Wait for fade out
+                await new Promise(resolve => setTimeout(resolve, 400));
+
+                try {
+                    // Priority 1: Check if global PARTICIPANTS_DATA is available (Data-as-JS strategy)
+                    if (window.PARTICIPANTS_DATA && window.PARTICIPANTS_DATA[tabId]) {
+                        console.log(`Loading ${tabId} from participants_data.js`);
+                        renderTable(tabId, window.PARTICIPANTS_DATA[tabId]);
+                    } else {
+                        // Priority 2: Attempt to fetch from TXT with cache busting
+                        console.log(`Attempting to fetch ${fileName}...`);
+                        const url = `${fileName}?t=${new Date().getTime()}`;
+                        const response = await fetch(url);
+                        if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                        const data = await response.json();
+                        renderTable(tabId, data);
+                    }
+                } catch (error) {
+                    console.warn(`Could not load ${tabId} via script or fetch. Using internal fallback.`, error);
+                    // Priority 3: Final internal fallback
+                    renderTable(tabId, fallbackData[tabId]);
+                } finally {
+                    // Remove switching class to trigger fadeIn for the whole section
+                    section.classList.remove('switching');
+                }
+            }
+
+            function renderTable(tabId, data) {
+                const columns = columnConfig[tabId];
+
+                // Render headers
+                tableHead.innerHTML = `<tr>${columns.map(col => `<th>${col}</th>`).join('')}</tr>`;
+
+                // Render body
+                tableBody.innerHTML = data.map(item => {
+                    const keys = Object.keys(item).filter(k => k !== 'fb');
+                    const rows = keys.map(k => `<td>${item[k]}</td>`).join('');
+                    const fbCell = `<td><a href="${item.fb}" target="_blank" class="fb-link" title="Facebook Profile">${fbIconSvg}</a></td>`;
+                    return `<tr>${rows}${fbCell}</tr>`;
+                }).join('');
+            }
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.getAttribute('data-tab');
+                    const fileName = button.getAttribute('data-file');
+
+                    // Switch active button
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    // Load and render
+                    loadTabData(tabId, fileName);
+                });
+            });
+
+            // Initial load
+            const initialBtn = document.querySelector('.tab-btn.active');
+            loadTabData(initialBtn.getAttribute('data-tab'), initialBtn.getAttribute('data-file'));
+        });
+    </script>
+</body>
+
+</html>
