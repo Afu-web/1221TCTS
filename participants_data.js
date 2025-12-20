@@ -4,7 +4,7 @@ window.PARTICIPANTS_DATA = {
     participants: [
         { name: "曉禔(Afu)", note: "主揪", fb: "https://www.facebook.com/23weif?locale=zh_TW" },
         { name: "白熊", note: "養胖", fb: "https://www.facebook.com/li.yi.min.230404?locale=zh_TW" },
-        { name: "丁香", note: "高歌一曲", fb: "https://www.facebook.com/da.er.duo.de.diao.ding.xiang?locale=zh_TW" },
+        { name: "丁香", note: "一壺澎大海", fb: "https://www.facebook.com/da.er.duo.de.diao.ding.xiang?locale=zh_TW" },
         { name: "許尼", note: "全能型", fb: "https://www.facebook.com/xu.ni.310702?locale=zh_TW" },
         { name: "晴雲", note: "12月壽星", fb: "https://www.facebook.com/xia.no.hu?locale=zh_TW" },
         { name: "沓羅", note: "樂手老師", fb: "https://www.facebook.com/taroOwO?locale=zh_TW" },
@@ -15,3 +15,4 @@ window.PARTICIPANTS_DATA = {
         { name: "寒暄", note: "歌唱老師", fb: "https://www.facebook.com/han.xuan.638973?locale=zh_TW" }
     ]
 };
+
