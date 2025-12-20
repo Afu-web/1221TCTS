@@ -12,7 +12,8 @@ window.PARTICIPANTS_DATA = {
         { name: "犬冽", note: "12月壽星", fb: "https://www.facebook.com/lin.zheng.xing.501285?locale=zh_TW" },
         { name: "星塵狼狼", note: "遠道而來", fb: "https://www.facebook.com/boris244?locale=zh_TW" },
         { name: "晴浪(中龍大大)", note: "流量密碼", fb: "https://www.facebook.com/ChungLungSW?locale=zh_TW" },
-        { name: "寒暄", note: "歌唱老師", fb: "https://www.facebook.com/han.xuan.638973?locale=zh_TW" }
+        { name: "寒暄", note: "角落小生物", fb: "https://www.facebook.com/han.xuan.638973?locale=zh_TW" }
     ]
 };
+
 
