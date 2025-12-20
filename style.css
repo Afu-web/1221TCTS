@@ -24,6 +24,22 @@ body {
     min-height: 100vh;
 }
 
+a {
+    color: #93c5fd;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #bfdbfe;
+    text-decoration: underline;
+}
+
+.location-link {
+    color: #818cf8;
+    font-weight: 600;
+}
+
 /* Background Blobs */
 .background-blobs {
     position: fixed;
